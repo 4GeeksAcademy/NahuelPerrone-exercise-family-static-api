@@ -39,7 +39,7 @@ def get_all_members():
 @app.route('/members/<int:id>', methods=['GET'])
 def get_member(id):
     try:        
-        member= jackson_family.get_members(id)
+        member= jackson_family.get_member(id)
         if member:
          return jsonify(member), 200
         else:
@@ -51,7 +51,7 @@ def get_member(id):
 def add_member():
     try:
         data = request.get_json()
-        if not data or "first_name" not in data or "age" not in data or "lucky_numbers" not in data:
+        if  not data or "first_name" not in data or "age" not in data or "lucky_numbers" not in data:
             return jsonify({"error": "Missing Member data"}), 400
         jackson_family.add_member(data)
         return jsonify(data), 200
@@ -71,7 +71,6 @@ def delete_member(id):
         return jsonify({"error":str(e)}),500
 
     
-
 
 # This only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':  
